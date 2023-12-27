@@ -1,4 +1,4 @@
-# `smbsocks`
+# `smbsocks`/`rpclink`
 
 ```
 a simple Go-only rpc2socks alternative. the client is windows-only 
@@ -13,5 +13,5 @@ usage:
 mingw32-make
 
 rundll32 rpcsrv.dll,DllGetClassObject
-rpccli.exe \\<ip>\pipe\testpipename
+then use a windows extension.
 ```
