@@ -12,6 +12,8 @@ usage:
 
 mingw32-make
 
-rundll32 rpcsrv.dll,DllGetClassObject
-then use a windows extension.
+cmd > rundll32 rpcsrv.dll,DllGetClassObject
+# then use a windows extension in Sliver and portforward the local port
+sliver > rpclink \\\\<ip>\\pipe\\port
+sliver > portfwd add -b 127.0.0.1:9050 -r 127.0.0.1:9050
 ```
