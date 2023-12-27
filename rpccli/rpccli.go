@@ -5,12 +5,11 @@ import (
     "net"
     "fmt"
     "log"
-    "os"
     "context"
     "github.com/armon/go-socks5"
     "github.com/zimnyaa/smbsocks/npipe"
 )
-
+import "C"
 
 func findUnusedPort(startPort int32) (int32) {
     for port := startPort; port <= 65535; port++ {
@@ -65,10 +64,16 @@ func (d sshResolver) Resolve(ctx context.Context, name string) (context.Context,
     return ctx, ipaddr, err
 }
 
-func main() {
-    socksconn, err := npipe.Dial(os.Args[1])
+//export dialpipe
+func dialpipe(urlc *C.char) {
+    fmt.Println("go received args:", urlc)
+    url := C.GoString(urlc)
+    fmt.Println("bind url:", url)
+
+    socksconn, err := npipe.Dial(url)
     if err != nil {
-        panic(err)
+        fmt.Println(err)
+        return
     }
     defer socksconn.Close()
 
@@ -88,7 +93,7 @@ func main() {
     
     defer sshConn.Close()
 
-    log.Printf("connected to backwards ssh server\n")
+    //log.Printf("connected to backwards ssh server\n")
 
     conf := &socks5.Config{
         Dial: func(ctx context.Context, network, addr string) (net.Conn, error) {
@@ -103,7 +108,7 @@ func main() {
         return
     }
     port := findUnusedPort(9050)
-    log.Printf("creating a socks server@%d\n", port)
+    //log.Printf("creating a socks server@%d\n", port)
     if err := serverSocks.ListenAndServe("tcp", fmt.Sprintf("0.0.0.0:%d", port)); err != nil {
         log.Fatalf("failed to create socks5 server%v\n", err)
     }
@@ -111,4 +116,4 @@ func main() {
     return
 }
 
-
+func main() {}

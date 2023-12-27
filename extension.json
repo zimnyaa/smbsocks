@@ -1,0 +1,17 @@
+{
+    "name": "rpclink",
+    "version": "0.0.1",
+    "command_name": "rpclink",
+    "extension_author": "zimnyaa",
+    "original_author": "zimnyaa",
+    "repo_url": "N/A",
+    "help": "DLL client for a remote SMB pivot, a companion extension for rpcsrv.dll",
+    "entrypoint": "entrypoint",
+    "files": [
+        {
+        "os": "windows",
+        "arch": "amd64",
+        "path": "rpccli.dll"
+        }
+    ]
+}
