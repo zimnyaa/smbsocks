@@ -1,8 +1,8 @@
 # `smbsocks`/`rpclink`
 
 ```
-a simple Go-only rpc2socks alternative. the client is windows-only 
-and should be run with runas /netonly with administrative credentials
+a simple Go-only rpc2socks alternative. the client is a windows-only
+Sliver extension
 
 establishes SOCKS over SSH over named pipes.
 vendors npipe to make the pipe remotely accessible.
