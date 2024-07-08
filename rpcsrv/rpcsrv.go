@@ -91,7 +91,10 @@ func DllGetClassObject() {
 				conn, err = net.Dial("tcp", dest)
 					
 				if err == nil {
-					channel, chreqs, _ := newChannel.Accept()
+					channel, chreqs, err := newChannel.Accept()
+					if err != nil {
+						return
+					}
 					go ssh.DiscardRequests(chreqs)
 		
 					go func() {
